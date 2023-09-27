@@ -26,9 +26,11 @@ const montarCarousel = (itens) => {
     const row = $("<div>").addClass("row").appendTo(slide);
 
     slideItens.forEach((item) => {
-      // Adicione os itens ao slide
-      let valor_unidade = String(item.valor);
-      let handleValor = valor_unidade.split(".");
+      let valor_unidade = item.valor;
+      let valor_formatado = valor_unidade.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+      });
+      let handleValor = valor_formatado.split(",");
 
       const col = $("<div>").addClass("col-sm-3").appendTo(row);
 

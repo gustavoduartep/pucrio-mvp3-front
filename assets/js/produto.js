@@ -74,8 +74,8 @@ if (typeof baseUrl !== "undefined") {
 function valorMonetarioParaFloat(valor) {
   var valorNumerico = valor.replace(/[^0-9,]/g, "");
   valorNumerico = valorNumerico.replace(",", ".");
-  var valorFloat = parseFloat(valorNumerico) / 100;
-  return valorFloat;
+  var valorFloat = parseFloat(valorNumerico);
+  return valorFloat.toFixed(2);
 }
 
 $("#adicionarItem").click(function () {
@@ -211,11 +211,16 @@ $("#tabelaItens").on("click", ".editar", function () {
       botaoAdicionar.hide();
       console.log(item);
 
+      const valorFloat = item.valor;
+      const valorFormatado = valorFloat.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+      });
+
       $("#itemId").val(item.id);
       $("#nome").val(item.nome);
       $("#descricao").val(item.descricao);
       $("#quantidade").val(item.quantidade);
-      $("#valor").val(item.valor);
+      $("#valor").val(valorFormatado);
       $("#peso").val(item.peso);
       $("#status").val(`${item.status}`);
 
